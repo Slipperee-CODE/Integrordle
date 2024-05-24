@@ -1,0 +1,32 @@
+<div th:fragment="background">
+	<link rel="stylesheet" href="css/background.css">
+	
+	<div id="move" style="height: 112.5vh; width: 112.5;">
+			<table>
+				<tr th:each="symbol : ${symbolList}">
+					<td th:each="symbolPer : ${symbol}">
+						<img th:src="@{${ SYMBOL_PATHS[symbolPer] + '.png'}}" alt="background" style="height: 15.5vh; width: 15.5vh">
+					</td>
+				</tr>
+			</table>
+	</div>
+			
+	<script>
+		function showCoords(event){
+			let SIZING_CONSTANT = .1;
+			
+			let cX = event.clientX;
+			let cY = event.clientY;
+		
+			
+			let screenPercentX = cX / window.innerWidth * 100 * SIZING_CONSTANT - 50;
+			let screenPercentY = cY / window.innerHeight * 100 * SIZING_CONSTANT - 50;
+			
+			//document.body.style.backgroundPosition = screenPercentX + "%" + screenPercentY + "%";
+			//document.body.style.backgroundPosition = screenPercentX + "%" + screenPercentY + "%";
+			//document.getElementById("coords").innerHTML = "clientX " + cX + "clientY " + cY + "<br>" + "sPX " + screenPercentX + "sPY " + screenPercentY;
+			document.getElementById("move").style.top = screenPercentY + "%"
+			document.getElementById("move").style.left = screenPercentX + "%"
+		}
+	</script>
+</div>

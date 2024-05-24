@@ -10,26 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 	
-	String[] SYMBOL_PATHS = {"images/multiply","images/subtract","images/plus","images/division"};
+	String[] SYMBOL_PATHS = {"images/multiply","images/subtract","images/add","images/divide"};
 	
 	@GetMapping("")
-	public String mainPage(Model model) {
-		List<ArrayList<Integer>> symbolList = new ArrayList<ArrayList<Integer>>();
-		
-		//randomly generate symbolList here
-		
-		int size = 20;
-		
-		for (int i = 0; i < size; i++) {
-			symbolList.add(new ArrayList<Integer>());
-			for (int k = 0; k < size; k++) {
-				symbolList.get(i).add((int) (Math.random()*SYMBOL_PATHS.length));
-			}
-		}
-		
-		model.addAttribute("symbolList", symbolList);
+	public String mainPage(Model model) {		
+		model.addAttribute("symbolList", generateBackgroundSymbols(30));
 		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
-		return "mainPageSmall";
+		return "home";
 	}
 	
 	@GetMapping("game")
@@ -44,5 +31,15 @@ public class MainController {
 		return "gamePage";
 	}
 	
+	private List<ArrayList<Integer>> generateBackgroundSymbols(int size) {
+		List<ArrayList<Integer>> symbolList = new ArrayList<ArrayList<Integer>>();
+		for (int i = 0; i < size; i++) {
+			symbolList.add(new ArrayList<Integer>());
+			for (int k = 0; k < size; k++) {
+				symbolList.get(i).add((int) (Math.random()*SYMBOL_PATHS.length));
+			}
+		}
+		return symbolList;
+	}
 	
 }
