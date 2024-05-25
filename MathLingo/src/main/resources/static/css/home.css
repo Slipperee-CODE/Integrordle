@@ -1,4 +1,48 @@
 .title{
-	font-size: xx-large;
+	position: absolute;
+	font-size: 5em;
 	font-weight: bold;
+	color: aliceblue;
+	
+	top: 42.5%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.title-box{
+	border-radius: 100px;
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 50vh;
+	width: 50vw;
+	background-color: rgb(18, 18, 19);
+	-webkit-box-shadow:0px 0px 130px 17px rgba(221,230,227,0.32);
+	-moz-box-shadow: 0px 0px 130px 17px rgba(221,230,227,0.32);
+	box-shadow: 0px 0px 130px 17px rgba(221,230,227,0.32);
+}
+
+.title-logo-image{
+	position: absolute;
+	width: 150px;
+	height: auto;
+	
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.play-button{
+	position:absolute;
+	
+	border-radius: 30px;
+	font-size: 50px;
+	font-weight: bold;
+	padding: 25px 75px;
+	
+	top: 72.5%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

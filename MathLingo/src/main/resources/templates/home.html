@@ -1,11 +1,17 @@
 <!doctype html>
-<html layout:decorate="layouts/defaultLayout">
+<html layout:decorate="layouts/homeLayout">
 	<head>
 		<link rel="stylesheet" href="css/home.css">
+		<link rel="icon" href="images/favicon-light.png">
+		<title>Home</title>
 	</head>
   	<body>
 		<div layout:fragment="content">	
-			
+			<div class="title-box">
+				<img src="images/logo-light.png" class="img-fluid title-logo-image" alt="Responsive image">
+				<h1 class ="title text-center">Integrordle</h1>
+				<a href="/game" class="btn btn-light play-button">Play</a>
+			</div>
 		</div>
 	</body>
 </html>

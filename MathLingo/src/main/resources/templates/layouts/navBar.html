@@ -1,5 +1,76 @@
 <div th:fragment="navBar">
-	<nav class="navbar navbar-dark bg-dark">
-	  <span class="navbar-brand mb-1 h1">Integrordle</span>
+	<link rel="stylesheet" href="css/navBar.css">
+	<nav class="navbar navbar-dark dark">
+	  <span class="navbar-brand mb-1 navbar-text">Integrordle</span>
+	  <div class="far-left">
+		<img onclick="changeHelp()" src="images/help.png" class="img-fluid help" alt="Responsive image">
+		<img onclick="changeNav()" src="images/settings.png" class="img-fluid settings" alt="Responsive image">
+	  </div>
 	</nav>
+	
+	<div id="mySidenav" class="sidenav">
+	  <div class="sidenav-info-top">
+		
+	  </div>
+	  <div class="sidenav-info">
+
+	  </div>
+	  <div class="sidenav-info">
+
+	  </div>
+	</div>
+	
+	<div id="help-box" class="help-box">
+		<div class="inner-help-box">
+			<div class="help-title-box">
+				<h1 class="how-to-title">How to Play</h1>
+			</div>
+			<div class="tutorial">
+				
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		let settingsOpen = false;
+		let helpOpen = false;
+		
+		function changeNav(){
+			if (settingsOpen){
+				closeNav();
+			} else {
+				openNav();
+			}
+			settingsOpen = !settingsOpen;
+		}
+			
+		function openNav() {
+			document.getElementById("mySidenav").style.height = "100%";
+		}
+	
+		function closeNav() {
+			document.getElementById("mySidenav").style.height = "0%";
+		}
+		
+		function changeHelp(){
+			if (helpOpen){
+				closeHelp();
+			} else {
+				openHelp();
+			}
+			helpOpen = !helpOpen;
+		}
+		
+		function openHelp() {
+			document.getElementById("help-box").style.opacity = "100%";
+			document.getElementById("help-box").style.visibility = "visible";
+			
+		}
+
+		function closeHelp() {
+			document.getElementById("help-box").style.opacity = "0%";
+			document.getElementById("help-box").style.visibility = "hidden";
+		}
+			
+	</script>
 </div>

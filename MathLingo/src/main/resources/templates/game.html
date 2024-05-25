@@ -1,0 +1,51 @@
+<!doctype html>
+<html layout:decorate="layouts/gameLayout">
+	<head>
+		<link rel="stylesheet" href="css/game.css">
+		<link rel="icon" href="images/favicon-light.png">
+		<title>Game</title>
+	</head>
+  	<body>
+		<div layout:fragment="content">	
+			<div class="game-box">
+				<div class="area-box">
+					<h1 class="area" th:text="${gameController.area}"></h1>
+				</div>
+				<div class="gameplay-box">
+				<table>
+					<tr th:each="guess, guessID : ${gameController.guesses}">
+						<div th:if="${guessID.index == gameController.guessIndex}">
+							<div class="curr-guess guess">
+								<form action="#" method="post" th:action="@{processGuess}" th:object="${userGuess}">
+								  <div class="form-group">
+								    <input th:field="*{constant}" id="text" placeholder="constant">
+								  </div>
+								  <div class="form-group">
+								    <input th:field="*{upperBound}" id="text" placeholder="upperBound">
+								  </div>
+								  <div class="form-group">
+								    <input th:field="*{lowerBound}" id="text" placeholder="lowerbound">
+								  </div>
+								  <div class="form-group">
+								    <input th:field="*{integralContent}" id="text" placeholder="integralContent">
+								  </div>
+								  <button type="submit" class="btn btn-primary">Submit</button>
+								</form>
+							</div>
+						</div>
+						
+						<div th:unless="${guessID.index == gameController.guessIndex}">
+							<div class = "not-curr-guess guess">
+								<p>Constant <span th:text="${guess.constant}"></span></p>
+								<p>UpperBound <span th:text="${guess.upperBound}"></span></p>
+								<p>LowerBound <span th:text="${guess.lowerBound}"></span></p>
+								<p>IntegralContent <span th:text="${guess.integralContent}"></span></p>
+							</div>
+						</div>
+					</tr>
+				</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
