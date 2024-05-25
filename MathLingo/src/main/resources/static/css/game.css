@@ -46,7 +46,19 @@
 }
 
 .guess {
-	height: 200px;
-	width: 200px;
-	margin:5px auto
+	height: 400px;
+	width: 90%;
+	margin: 10px auto
+}
+
+.wordle-gray{
+	background-color: gray;
+}
+
+.wordle-yellow{
+	background-color: yellow;
+}
+
+.wordle-green{
+	background-color: green;
 }

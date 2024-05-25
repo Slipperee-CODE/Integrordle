@@ -1,5 +1,7 @@
 package com.caischeidler.models;
 
+import java.util.Arrays;
+
 public class GameController {
 	public int guessIndex = 0;
 	public String area;
@@ -16,13 +18,22 @@ public class GameController {
 	}
 	
 	public boolean inputCurrGuess(Guess guess) {
+		guess.setupGuessPieces();
 		guesses[guessIndex] = guess;
+		//System.out.println("Guesses List W/ User Guess" + Arrays.toString(guesses));
 		guesses[guessIndex].updateColors(solution);
 		if(guesses[guessIndex].checkForWin()) {
 			return true;
 		}
-		System.out.println(guesses[guessIndex]);
 		guessIndex++;
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "GameController [guessIndex=" + guessIndex + ", area=" + area + ", guesses=" + Arrays.toString(guesses)
+				+ ", solution=" + solution + "]";
+	}
+	
+	
 }

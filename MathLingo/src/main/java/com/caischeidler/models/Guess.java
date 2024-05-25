@@ -6,7 +6,7 @@ public class Guess {
 	public GuessPiece upperBound;
 	public GuessPiece integralContent;
 	private GuessPiece[] guessPieces = {constant, lowerBound, upperBound, integralContent};
-	public static final String[] COLORS = {"gray","yellow","green"};
+	public static final String[] COLORS = {"wordle-gray","wordle-yellow","wordle-green"};
 	
 	public Guess(String[] solutionStrings) {
 		for (int i = 0; i < guessPieces.length; i++) {
@@ -21,9 +21,20 @@ public class Guess {
 	}
 
 	public void updateColors(Guess solution){
+		//FIX THIS LOGIC TO ACCOUNT FOR MULTIPLES OF THE SAME CHARACTER APPEARING ACROSS GUESSES
+		
+		
 		for (int i = 0; i < solution.guessPieces.length; i++) {
 			for (int k = 0; k < guessPieces.length; k++) {
-				solution.guessPieces[i].containsGuessPiece(guessPieces[k]);
+				if (solution.guessPieces[i].input.indexOf(guessPieces[k].input) >= 0) {
+					guessPieces[k].color = COLORS[1];
+				}
+			}
+		}
+		
+		for (int i = 0; i < solution.guessPieces.length; i++) {
+			if (guessPieces[i].input.equals(solution.guessPieces[i].input)) {
+				guessPieces[i].color = COLORS[2];
 			}
 		}
 	}
@@ -35,6 +46,10 @@ public class Guess {
 			}
 		}
 		return true;
+	}
+	
+	public void setupGuessPieces() {
+		guessPieces = new GuessPiece[] {constant, lowerBound, upperBound, integralContent};
 	}
 	
 	public GuessPiece getConstant() {

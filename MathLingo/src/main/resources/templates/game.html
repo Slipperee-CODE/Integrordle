@@ -18,28 +18,37 @@
 							<div class="curr-guess guess">
 								<form action="#" method="post" th:action="@{processGuess}" th:object="${userGuess}">
 								  <div class="form-group">
-								    <input th:field="*{constant}" id="text" placeholder="constant">
+								    <input th:field="*{constant.input}" id="text" placeholder="constant">
 								  </div>
 								  <div class="form-group">
-								    <input th:field="*{upperBound}" id="text" placeholder="upperBound">
+								    <input th:field="*{upperBound.input}" id="text" placeholder="upperBound">
 								  </div>
 								  <div class="form-group">
-								    <input th:field="*{lowerBound}" id="text" placeholder="lowerbound">
+								    <input th:field="*{lowerBound.input}" id="text" placeholder="lowerbound">
 								  </div>
 								  <div class="form-group">
-								    <input th:field="*{integralContent}" id="text" placeholder="integralContent">
+								    <input th:field="*{integralContent.input}" id="text" placeholder="integralContent">
 								  </div>
 								  <button type="submit" class="btn btn-primary">Submit</button>
 								</form>
 							</div>
 						</div>
 						
-						<div th:unless="${guessID.index == gameController.guessIndex}">
+						<div th:if="${guessID.index > gameController.guessIndex}">
 							<div class = "not-curr-guess guess">
 								<p>Constant <span th:text="${guess.constant}"></span></p>
 								<p>UpperBound <span th:text="${guess.upperBound}"></span></p>
 								<p>LowerBound <span th:text="${guess.lowerBound}"></span></p>
 								<p>IntegralContent <span th:text="${guess.integralContent}"></span></p>
+							</div>
+						</div>
+						
+						<div th:if="${guessID.index < gameController.guessIndex}">
+							<div class = "not-curr-guess guess">
+								<p th:classappend="${guess.constant.color}">Constant <span th:text="${guess.constant}"></span></p>
+								<p th:classappend="${guess.upperBound.color}">UpperBound <span th:text="${guess.upperBound}"></span></p>
+								<p th:classappend="${guess.lowerBound.color}">LowerBound <span th:text="${guess.lowerBound}"></span></p>
+								<p th:classappend="${guess.integralContent.color}">IntegralContent <span th:text="${guess.integralContent}"></span></p>
 							</div>
 						</div>
 					</tr>
