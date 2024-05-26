@@ -22,13 +22,14 @@ public class Guess {
 
 	public void updateColors(Guess solution){
 		//FIX THIS LOGIC TO ACCOUNT FOR MULTIPLES OF THE SAME CHARACTER APPEARING ACROSS GUESSES
+		//Change this so that it checks for the solution substring in the actual and not the other way round
 		
 		
 		for (int i = 0; i < solution.guessPieces.length; i++) {
 			for (int k = 0; k < guessPieces.length; k++) {
 				if (solution.guessPieces[i].input.indexOf(guessPieces[k].input) >= 0) {
 					guessPieces[k].color = COLORS[1];
-				}
+				}    
 			}
 		}
 		

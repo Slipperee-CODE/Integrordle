@@ -47,6 +47,8 @@ public class MainController {
 		
 		
 		//TO IMPLEMENT
+		// - FORMAT INTEGRAL INPUT
+		// - FORMAT MATH PROBLEM
 		// - PLAY AGAIN
 		// - TEXT FILE FULL OF PROBLEMS
 		// - WIN AND LOSE SCREENS
