@@ -5,24 +5,15 @@
 		<link rel="icon" href="images/favicon-light.png">
 		<title>Game</title>
 		
-		<!--
 		<script id="MathJax-script"
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 		</script>
 		
 		<script>		
-			let a = 1;
-				
-			window.addEventListener('load', function() {
-				//document.getElementById("math").addEventListener("click", goofyahh);
-				document.getElementById("math").addEventListener("click", typeset(() => {
-					const math = document.querySelector('#textbox');
-					console.log(math);
-					a = a++;
-					math.value = '$$ \\frac{a}{' + a + '-a^2}$$';
-					return [math];
+			window.addEventListener('load', typeset(() => {
+					let problemHeader = document.getElementById("problemHeader");
+					return [problemHeader];
 				}));
-			})
 			
 			let promise = Promise.resolve();  // Used to hold chain of typesetting calls
 
@@ -31,65 +22,47 @@
 			                   .catch((err) => console.log('Typeset failed: ' + err.message));
 			  return promise;
 			}
-			
-			function goofyahh(){
-				const a = document.getElementById("textbox");
-				alert(a.value);
-				a.value = "value";
-			}
 		</script>
-		-->
 	</head>
   	<body>
 		<div layout:fragment="content">	
 			<div class="game-box">
-				<div class="area-box">
-					<h1 id="math" class="area" th:text="${gameController.area}"></h1>
+				<div class="header-box">
+					<h1 id="problemHeader" th:text="${problemHandler.problem.mathJaxFormattedIntegral}"></h1>
+					<h2 th:text="${problemHandler.problem.description}"></h2>
 				</div>
 				<div class="gameplay-box">
-				<table>
-					<tr th:each="guess, guessID : ${gameController.guesses}">
-						<div th:if="${guessID.index == gameController.guessIndex}">
+					
+					<th:block th:each="guess, guessIter : ${#numbers.sequence(0, problemHandler.maxGuessesAllowed-1)}">
+						<div th:if="${guessIter.index == problemHandler.guessIndex}">
 							<div class="curr-guess guess">
-								<form action="#" method="post" th:action="@{processGuess}" th:object="${userGuess}">
-								  <div class="form-group">
-								    <input type="text" th:field="*{constant.input}" class="constant math-input" maxlength="1" placeholder="constant">
-								  </div>
-								  <img src="images/integral-sign.png" class="img-fluid integral-sign" alt="Responsive image">
-								  <div class="form-group">
-								    <input type="text" th:field="*{upperBound.input}" class="upperBound math-input" maxlength="1" placeholder="upperBound">
-								  </div>
-								  <div class="form-group">
-								    <input type="text" th:field="*{lowerBound.input}" class="lowerBound math-input" maxlength="1" placeholder="lowerbound">
-								  </div>
-								  <div class="form-group">
-								    <input type="text" th:field="*{integralContent.input}" class="integralContent math-input" maxlength="1" placeholder="integralContent">
-								  </div>
-								  <img src="images/favicon-light.png" class="img-fluid dx" alt="Responsive image">
-								  <button type="submit" class="btn btn-primary guessSubmit">Submit</button>
-								</form>
+								<h1 th:text="${problemHandler.problem.mathJaxFormattedFunction}"></h1>
+								<div class="curr-guess-boxes">
+									<form action="#" method="post" th:action="@{processGuess}">
+										<th:block th:each="boxID, boxIDIter : ${problemHandler.problem.boxIDs}" th:object="${userGuess}">
+											
+												<div th:if="${#strings.equals(boxID, problemHandler.problem.CHAR_BOX)}"> 
+													<input th:field="*{guessBoxes[__${boxIDIter.index}__]}" class="char-box" placeholder="char box" maxlength="1"></input>
+												</div>
+												
+												<div th:if="${#strings.equals(boxID, problemHandler.problem.EXPO_BOX)}"> 
+													<input th:field="*{guessBoxes[__${boxIDIter.index}__]}" class="expo-box" placeholder="expo box" maxlength="1"></input>
+												</div>
+												
+										</th:block>
+										<button type="submit" class="btn btn-primary guessSubmit">Submit</button>
+									</form>
+								</div>
 							</div>
 						</div>
 						
-						<div th:if="${guessID.index > gameController.guessIndex}">
-							<div class = "not-curr-guess guess">
-								<p>Constant <span th:text="${guess.constant}"></span></p>
-								<p>UpperBound <span th:text="${guess.upperBound}"></span></p>
-								<p>LowerBound <span th:text="${guess.lowerBound}"></span></p>
-								<p>IntegralContent <span th:text="${guess.integralContent}"></span></p>
+						<div th:if="${guessIter.index != problemHandler.guessIndex}">
+							<div class="not-curr-guess guess"> 
+								<p>NOT CURR GUESS</p>
 							</div>
 						</div>
-						
-						<div th:if="${guessID.index < gameController.guessIndex}">
-							<div class = "not-curr-guess guess">
-								<p th:classappend="${guess.constant.color}">Constant <span th:text="${guess.constant}"></span></p>
-								<p th:classappend="${guess.upperBound.color}">UpperBound <span th:text="${guess.upperBound}"></span></p>
-								<p th:classappend="${guess.lowerBound.color}">LowerBound <span th:text="${guess.lowerBound}"></span></p>
-								<p th:classappend="${guess.integralContent.color}">IntegralContent <span th:text="${guess.integralContent}"></span></p>
-							</div>
-						</div>
-					</tr>
-				</table>
+					</th:block>
+				
 				</div>
 			</div>
 		</div>

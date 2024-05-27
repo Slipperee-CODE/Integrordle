@@ -1,4 +1,4 @@
-package com.caischeidler.models;
+package com.caischeidler.models.OLD;
 
 import java.util.Arrays;
 
