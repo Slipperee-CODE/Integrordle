@@ -4,12 +4,47 @@
 		<link rel="stylesheet" href="css/game.css">
 		<link rel="icon" href="images/favicon-light.png">
 		<title>Game</title>
+		
+		<!--
+		<script id="MathJax-script"
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+		</script>
+		
+		<script>		
+			let a = 1;
+				
+			window.addEventListener('load', function() {
+				//document.getElementById("math").addEventListener("click", goofyahh);
+				document.getElementById("math").addEventListener("click", typeset(() => {
+					const math = document.querySelector('#textbox');
+					console.log(math);
+					a = a++;
+					math.value = '$$ \\frac{a}{' + a + '-a^2}$$';
+					return [math];
+				}));
+			})
+			
+			let promise = Promise.resolve();  // Used to hold chain of typesetting calls
+
+			function typeset(code) {
+			  promise = promise.then(() => MathJax.typesetPromise(code()))
+			                   .catch((err) => console.log('Typeset failed: ' + err.message));
+			  return promise;
+			}
+			
+			function goofyahh(){
+				const a = document.getElementById("textbox");
+				alert(a.value);
+				a.value = "value";
+			}
+		</script>
+		-->
 	</head>
   	<body>
 		<div layout:fragment="content">	
 			<div class="game-box">
 				<div class="area-box">
-					<h1 class="area" th:text="${gameController.area}"></h1>
+					<h1 id="math" class="area" th:text="${gameController.area}"></h1>
 				</div>
 				<div class="gameplay-box">
 				<table>
@@ -18,18 +53,20 @@
 							<div class="curr-guess guess">
 								<form action="#" method="post" th:action="@{processGuess}" th:object="${userGuess}">
 								  <div class="form-group">
-								    <input th:field="*{constant.input}" id="text" placeholder="constant">
+								    <input type="text" th:field="*{constant.input}" class="constant math-input" maxlength="1" placeholder="constant">
+								  </div>
+								  <img src="images/integral-sign.png" class="img-fluid integral-sign" alt="Responsive image">
+								  <div class="form-group">
+								    <input type="text" th:field="*{upperBound.input}" class="upperBound math-input" maxlength="1" placeholder="upperBound">
 								  </div>
 								  <div class="form-group">
-								    <input th:field="*{upperBound.input}" id="text" placeholder="upperBound">
+								    <input type="text" th:field="*{lowerBound.input}" class="lowerBound math-input" maxlength="1" placeholder="lowerbound">
 								  </div>
 								  <div class="form-group">
-								    <input th:field="*{lowerBound.input}" id="text" placeholder="lowerbound">
+								    <input type="text" th:field="*{integralContent.input}" class="integralContent math-input" maxlength="1" placeholder="integralContent">
 								  </div>
-								  <div class="form-group">
-								    <input th:field="*{integralContent.input}" id="text" placeholder="integralContent">
-								  </div>
-								  <button type="submit" class="btn btn-primary">Submit</button>
+								  <img src="images/favicon-light.png" class="img-fluid dx" alt="Responsive image">
+								  <button type="submit" class="btn btn-primary guessSubmit">Submit</button>
 								</form>
 							</div>
 						</div>

@@ -47,11 +47,13 @@ public class MainController {
 		
 		
 		//TO IMPLEMENT
+		// - FORMAT MATH TEXT
+		
+		// - FIX COLORING SCHEME (ADD COLORS)
 		// - FORMAT INTEGRAL INPUT
-		// - FORMAT MATH PROBLEM
-		// - PLAY AGAIN
-		// - TEXT FILE FULL OF PROBLEMS
 		// - WIN AND LOSE SCREENS
+		// - PLAY AGAIN
+		// - TEXT FILE FULL OF PROBLEMS   
 		
 		
 		model.addAttribute("userGuess", new Guess());
