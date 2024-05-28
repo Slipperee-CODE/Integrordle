@@ -43,25 +43,70 @@
 	height: 100px;
 }
 
-.curr-guess-boxes{
+.curr-guess{
+	background-color: rgb(128, 255, 128);
+}
+
+.guess-boxes{
 	display: flex;
 	flex-direction: row;
-	align-items: center;
-	justify-content: space-evenly;
+}
+
+.char-box{
+	height: 200px;
+	width: 200px;
+	font-size: 10em;
+	
+	display: flex;
+	text-align: center;
+	justify-content: center;
+}
+
+.expo-box{
+	height: 100px;
+	width: 100px;
+	margin-bottom: 10px;
+	font-size: 4em;
+		
+	display: flex;
+	text-align: center;
+	justify-content: center;
+}
+
+.char-box h1{
+	font-size: 1em;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.expo-box h1{
+	font-size: .75em;
+	font-weight: bold;
+	padding: 40px;
+}
+
+.box {
+	background-color: black;
+	border-color: gray;
+	border-style: solid;
+	border-width: 4px;
+	margin: 5px 5px 5px 5px;
+
+	color: aliceblue;
+	font-weight: bold;
 }
 
 .guess {
-	height: 400px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 300px;
 	width: 90%;
 	margin: 10px auto;
 }
 
-.curr-guess
-{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: rgb(128, 255, 128);
+.guessSubmit{
+	visibility: hidden;
 }
 
 .not-curr-guess
@@ -71,12 +116,15 @@
 
 .integrordle-gray{
 	background-color: gray;
+	border-width: 0;
 }
 
 .integrordle-yellow{
 	background-color: yellow;
+	border-width: 0;
 }
 
 .integrordle-green{
 	background-color: green;
+	border-width: 0;
 }
