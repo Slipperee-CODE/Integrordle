@@ -70,11 +70,11 @@
 										<th:block th:each="boxID, boxIDIter : ${problemHandler.problem.boxIDs}">
 	
 												<div th:if="${#strings.equals(boxID, problemHandler.problem.CHAR_BOX)}"> 
-													<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-char-box char-box box" maxlength="1"></input>
+													<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-char-box char-box box" maxlength="1" 	required></input>
 												</div>
 												
 												<div th:if="${#strings.equals(boxID, problemHandler.problem.EXPO_BOX)}"> 
-													<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-expo-box expo-box box" maxlength="1"></input>
+													<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-expo-box expo-box box" maxlength="1" required></input>
 												</div>
 												
 										</th:block>
