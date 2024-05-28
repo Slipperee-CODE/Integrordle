@@ -1,5 +1,7 @@
 package com.caischeidler.models;
 
+import java.util.Arrays;
+
 public class Guess {
 	private GuessBox[] guessBoxes;
 
@@ -14,5 +16,10 @@ public class Guess {
 
 	public void setGuessBoxes(GuessBox[] guessBoxes) {
 		this.guessBoxes = guessBoxes;
+	}
+
+	@Override
+	public String toString() {
+		return "Guess [guessBoxes=" + Arrays.toString(guessBoxes) + "]";
 	}
 }

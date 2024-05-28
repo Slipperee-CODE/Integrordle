@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.caischeidler.models.Guess;
@@ -51,11 +52,13 @@ public class MainController {
 	}
 	
 	@PostMapping("processGuess")
-	public String processGuess(Guess userGuess, Model model) {
+	public String processGuess(@ModelAttribute("userGuess") Guess userGuess, Model model) {
 		model.addAttribute("symbolList", generateBackgroundSymbols(30));
 		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
 		
 
+		System.out.println(userGuess);
+		System.out.println(problemHandler);
 		problemHandler.handleCurrGuess(userGuess);
 		model.addAttribute("problemHandler", problemHandler);
 		model.addAttribute("userGuess", new Guess(problemHandler.getProblem())); //The problem in problemHandler is null for some reason here

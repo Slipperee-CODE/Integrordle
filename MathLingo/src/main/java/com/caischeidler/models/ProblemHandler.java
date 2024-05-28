@@ -1,5 +1,7 @@
 package com.caischeidler.models;
 
+import java.util.Arrays;
+
 public class ProblemHandler {
 	private Guess[] guesses;
 	private Problem problem;
@@ -107,5 +109,11 @@ public class ProblemHandler {
 
 	public void setWin(boolean win) {
 		this.win = win;
+	}
+
+	@Override
+	public String toString() {
+		return "ProblemHandler [guesses=" + Arrays.toString(guesses) + ", problem=" + problem + ", maxGuessesAllowed="
+				+ maxGuessesAllowed + ", guessIndex=" + guessIndex + ", win=" + win + "]";
 	}
 }
