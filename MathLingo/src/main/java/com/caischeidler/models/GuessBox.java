@@ -1,12 +1,13 @@
 package com.caischeidler.models;
 
 public class GuessBox {
-	private String value;
-	private String color;
 	public static final String GRAY = "integrordle-gray";
 	public static final String YELLOW = "integrodle-yellow";
 	public static final String GREEN = "integrordle-green";
 	
+	private String value;
+	private String color = GRAY;
+
 	public String getValue() {
 		return value;
 	}

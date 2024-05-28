@@ -44,24 +44,26 @@ public class MainController {
 		
 		Problem problem = new Problem("an easy start", "f", "constant", "upperBound", "lowerBound", "area", new String[] {Problem.CHAR_BOX, Problem.EXPO_BOX}, new String[] {"1","2"});
 		problemHandler = new ProblemHandler(problem, 2);
-		
+
 		model.addAttribute("problemHandler", problemHandler);
-		model.addAttribute("userGuess", new Guess(problem));
+		Guess guess = new Guess();
+		guess.setProblem(problem);
+		model.addAttribute("userGuess", guess);
 		
 		return "game";
 	}
 	
 	@PostMapping("processGuess")
-	public String processGuess(@ModelAttribute("userGuess") Guess userGuess, Model model) {
+	public String processGuess(@ModelAttribute("userGuess") Guess userGuess, Model model) { //User Guess is not being received properly 
 		model.addAttribute("symbolList", generateBackgroundSymbols(30));
 		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
 		
 
-		System.out.println(userGuess);
-		System.out.println(problemHandler);
 		problemHandler.handleCurrGuess(userGuess);
 		model.addAttribute("problemHandler", problemHandler);
-		model.addAttribute("userGuess", new Guess(problemHandler.getProblem())); //The problem in problemHandler is null for some reason here
+		Guess guess = new Guess();
+		guess.setProblem(problemHandler.getProblem());
+		model.addAttribute("userGuess", guess);
 		
 		return "game";
 	}

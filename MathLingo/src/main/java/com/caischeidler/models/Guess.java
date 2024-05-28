@@ -4,10 +4,15 @@ import java.util.Arrays;
 
 public class Guess {
 	private GuessBox[] guessBoxes;
-
-	public Guess(Problem problem) {
-		super();
+	private Problem problem;
+	
+	public void setProblem(Problem problem) {
+		this.problem = problem;
 		this.guessBoxes = new GuessBox[problem.getBoxIDs().length];
+	}
+	
+	public Problem getProblem() {
+		return problem;
 	}
 
 	public GuessBox[] getGuessBoxes() {
