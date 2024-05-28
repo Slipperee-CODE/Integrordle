@@ -68,3 +68,15 @@
 {
 	background-color: rgb(255, 0, 0);
 }
+
+.integrordle-gray{
+	background-color: gray;
+}
+
+.integrordle-yellow{
+	background-color: yellow;
+}
+
+.integrordle-green{
+	background-color: green;
+}
