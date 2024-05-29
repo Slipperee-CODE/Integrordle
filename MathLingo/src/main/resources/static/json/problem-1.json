@@ -1,0 +1,11 @@
+{	
+	"description" : "back, then back again",
+	"functionLetter" : "f",
+	"constant" : "-1",
+	"upperBound" : "1",
+	"lowerBound" : "2",
+	"area" : "3",
+	"boxIDs" : ["CHAR_BOX", "CHAR_BOX"],
+	"guessBoxSolutions" : ["2", "x"],
+	"maxGuesses" : 3
+}

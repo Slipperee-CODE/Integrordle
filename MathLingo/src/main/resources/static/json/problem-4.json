@@ -1,0 +1,11 @@
+{	
+	"description" : "give me a sign",
+	"functionLetter" : "f",
+	"constant" : "1",
+	"upperBound" : "0",
+	"lowerBound" : "\\pi",
+	"area" : "-2",
+	"boxIDs" : ["CHAR_BOX", "CHAR_BOX", "CHAR_BOX", "CHAR_BOX", "CHAR_BOX", "CHAR_BOX"],
+	"guessBoxSolutions" : ["s", "i", "n","(", "x", ")"],
+	"maxGuesses" : 4
+}

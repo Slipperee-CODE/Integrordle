@@ -1,0 +1,11 @@
+{	
+	"description" : "an easy one, with a trick",
+	"functionLetter" : "f",
+	"constant" : "\\pi",
+	"upperBound" : "1",
+	"lowerBound" : "0",
+	"area" : "\\pi",
+	"boxIDs" : ["CHAR_BOX","CHAR_BOX"],
+	"guessBoxSolutions" : ["2", "x"],
+	"maxGuesses" : 2
+}

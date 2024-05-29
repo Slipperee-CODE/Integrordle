@@ -48,6 +48,10 @@
 	flex-direction: row;
 }
 
+.center-items{
+	align-items: center;
+}
+
 .char-box{
 	height: 200px;
 	width: 200px;
@@ -107,12 +111,12 @@
 }
 
 .curr-guess{
-	background-color: rgb(128, 255, 128, 0.1);
+	background-color: rgb(128, 255, 128, 0);
 }
 
 .not-curr-guess
 {
-	background-color: rgb(255, 0, 0, 0.1);
+	background-color: rgb(255, 0, 0, 0);
 }
 
 .integrordle-gray{
@@ -190,7 +194,7 @@
 .micro-expo-box{
 	height: 25px;
 	width: 25px;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 		
 	display: flex;
 	text-align: center;

@@ -1,6 +1,7 @@
 package com.caischeidler.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProblemHandler {
@@ -114,5 +115,11 @@ public class ProblemHandler {
 
 	public void setProblemID(int problemID) {
 		this.problemID = problemID;
+	}
+
+	@Override
+	public String toString() {
+		return "ProblemHandler [guesses=" + Arrays.toString(guesses) + ", problem=" + problem + ", maxGuessesAllowed="
+				+ maxGuessesAllowed + ", guessIndex=" + guessIndex + ", win=" + win + ", problemID=" + problemID + "]";
 	}
 }

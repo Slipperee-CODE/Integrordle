@@ -74,14 +74,20 @@
 							<div class="stats-title-box">
 								<h1>Nice Try!</h1>
 							</div>
-							<!-- Make the solution in the div below and make it click to show/hide-->
+							<!-- 
+							Make the solution in the div below and make it click to show/hide
+							afterwards finish the how to play section of main menu and cuellar up the settings menu
+							afterwards create system of bag randomization so that the player doesn't get the same problem 
+							twice before going through every problem
+							figure out centering of post game stats
+							-->
 							<div class="solution-on-loss">
 								
 							</div>
 							<div class="stats-body">
 								<h1>This Play's Stats</h1>
 								<th:block th:each="guessIndex : ${#numbers.sequence(0, problemHandler.guessIndex-1)}">
-									<div class="guess-boxes">
+									<div class="guess-boxes center-items">
 										<th:block th:each="guessBoxIndex : ${#numbers.sequence(0, problemHandler.problem.boxIDs.length-1)}">
 											
 											<div th:if="${#strings.equals(problemHandler.problem.boxIDs[__${guessBoxIndex}__], problemHandler.problem.CHAR_BOX)}"> 

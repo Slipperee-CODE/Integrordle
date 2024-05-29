@@ -1,5 +1,7 @@
 package com.caischeidler.models;
 
+import java.util.Arrays;
+
 public class Problem {
 	private String description;
 	private String mathJaxFormattedIntegral;
@@ -77,5 +79,12 @@ public class Problem {
 
 	public void setMaxGuesses(int maxGuesses) {
 		this.maxGuesses = maxGuesses;
+	}
+
+	@Override
+	public String toString() {
+		return "Problem [description=" + description + ", mathJaxFormattedIntegral=" + mathJaxFormattedIntegral
+				+ ", mathJaxFormattedFunction=" + mathJaxFormattedFunction + ", boxIDs=" + Arrays.toString(boxIDs)
+				+ ", guessBoxSolutions=" + Arrays.toString(guessBoxSolutions) + ", maxGuesses=" + maxGuesses + "]";
 	}
 }

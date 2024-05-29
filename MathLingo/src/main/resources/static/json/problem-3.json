@@ -1,0 +1,11 @@
+{	
+	"description" : "concave up, one up",
+	"functionLetter" : "f",
+	"constant" : "\\pi",
+	"upperBound" : "1",
+	"lowerBound" : "0",
+	"area" : "\\frac{4}{3} \\pi",
+	"boxIDs" : ["CHAR_BOX", "EXPO_BOX", "CHAR_BOX", "CHAR_BOX"],
+	"guessBoxSolutions" : ["x", "2", "+", "1"],
+	"maxGuesses" : 3
+}
