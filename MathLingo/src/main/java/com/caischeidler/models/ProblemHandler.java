@@ -1,7 +1,6 @@
 package com.caischeidler.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ProblemHandler {
@@ -10,12 +9,14 @@ public class ProblemHandler {
 	private int maxGuessesAllowed;
 	private int guessIndex = 0;
 	private boolean win = false;
+	private int problemID;
 	
-	public ProblemHandler(Problem problem, int maxGuessesAllowed) {
+	public ProblemHandler(Problem problem, int maxGuessesAllowed, int problemID) {
 		super();
 		this.guesses = new Guess[maxGuessesAllowed];
 		this.problem = problem;
 		this.maxGuessesAllowed = maxGuessesAllowed;
+		this.problemID = problemID;
 	}
 
 	public void handleCurrGuess(Guess guess) {
@@ -107,9 +108,11 @@ public class ProblemHandler {
 		this.win = win;
 	}
 
-	@Override
-	public String toString() {
-		return "ProblemHandler [guesses=" + Arrays.toString(guesses) + ", problem=" + problem + ", maxGuessesAllowed="
-				+ maxGuessesAllowed + ", guessIndex=" + guessIndex + ", win=" + win + "]";
+	public int getProblemID() {
+		return problemID;
+	}
+
+	public void setProblemID(int problemID) {
+		this.problemID = problemID;
 	}
 }

@@ -10,15 +10,17 @@ public class Problem {
 	public static final String EXPO_BOX = "EXPO_BOX";
 	
 	private String[] guessBoxSolutions;
+	private int maxGuesses;
 	
 	public Problem(String description, String functionLetter, String constant, String upperBound, String lowerBound, String area,
-			String[] boxIDs, String[] guessBoxSolutions) {
+			String[] boxIDs, String[] guessBoxSolutions, int maxGuesses) {
 		super();
 		this.description = description;
 		this.mathJaxFormattedIntegral = "$$" + constant + "\\int_{" + lowerBound + "}^{" +  upperBound + "}" + functionLetter + "(x) \\,dx =" + area + "$$";
 		this.mathJaxFormattedFunction = "$$" + functionLetter + "(x) =" + "$$";
 		this.boxIDs = boxIDs;
 		this.guessBoxSolutions = guessBoxSolutions;
+		this.maxGuesses = maxGuesses;
 	}
 
 	public String getDescription() {
@@ -67,5 +69,13 @@ public class Problem {
 
 	public static String getExpoBox() {
 		return EXPO_BOX;
+	}
+
+	public int getMaxGuesses() {
+		return maxGuesses;
+	}
+
+	public void setMaxGuesses(int maxGuesses) {
+		this.maxGuesses = maxGuesses;
 	}
 }

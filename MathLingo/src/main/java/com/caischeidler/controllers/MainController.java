@@ -1,5 +1,7 @@
 package com.caischeidler.controllers;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.caischeidler.models.Guess;
 import com.caischeidler.models.Problem;
 import com.caischeidler.models.ProblemHandler;
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class MainController {
@@ -29,7 +34,7 @@ public class MainController {
 	String[] SYMBOL_PATHS = {"images/multiply","images/subtract","images/add","images/divide"};
 	ProblemHandler problemHandler;
 	
-	@GetMapping("")
+	@GetMapping("") //maybe just put cuellar's favorite things in the menu like sponsors, have how to play be normal
 	public String mainPage(Model model) {		
 		model.addAttribute("symbolList", generateBackgroundSymbols(30));
 		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
@@ -41,13 +46,16 @@ public class MainController {
 		model.addAttribute("symbolList", generateBackgroundSymbols(30));
 		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
 		
+
+		problemHandler = getRandomProblem(1); //TO-DO: Create JSON files for problems 
 		
-		Problem problem = new Problem("an easy start", "f", "constant", "upperBound", "lowerBound", "area", new String[] {Problem.CHAR_BOX, Problem.EXPO_BOX, Problem.CHAR_BOX, Problem.CHAR_BOX}, new String[] {"1","1","2","3"});
-		problemHandler = new ProblemHandler(problem, 2);
+		
+		//Problem problem = new Problem("an easy start", "f", "constant", "upperBound", "lowerBound", "area", new String[] {Problem.CHAR_BOX, Problem.EXPO_BOX, Problem.CHAR_BOX, Problem.CHAR_BOX}, new String[] {"1","1","2","3"});
+		//problemHandler = new ProblemHandler(problem, 2, 0);
 
 		model.addAttribute("problemHandler", problemHandler);
 		Guess guess = new Guess();
-		guess.setProblem(problem);
+		guess.setProblem(problemHandler.getProblem());
 		model.addAttribute("userGuess", guess);
 		
 		return "game";
@@ -79,4 +87,19 @@ public class MainController {
 		return symbolList;
 	}
 	
+	private ProblemHandler getRandomProblem(int problemCount) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		int randomProblemID = (int) (Math.random()*problemCount);
+		File problemJSONFile = new File("json/problem-" + randomProblemID + ".json");
+		Problem problem = null;
+		
+		try {
+			 problem = objectMapper.readValue(problemJSONFile, Problem.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new ProblemHandler(problem, problem.getMaxGuesses(), randomProblemID);
+	}
 }
