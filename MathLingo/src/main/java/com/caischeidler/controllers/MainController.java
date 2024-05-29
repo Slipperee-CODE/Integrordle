@@ -42,7 +42,7 @@ public class MainController {
 		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
 		
 		
-		Problem problem = new Problem("an easy start", "f", "constant", "upperBound", "lowerBound", "area", new String[] {Problem.CHAR_BOX, Problem.EXPO_BOX, Problem.CHAR_BOX, Problem.CHAR_BOX}, new String[] {"1","2","3","4"});
+		Problem problem = new Problem("an easy start", "f", "constant", "upperBound", "lowerBound", "area", new String[] {Problem.CHAR_BOX, Problem.EXPO_BOX, Problem.CHAR_BOX, Problem.CHAR_BOX}, new String[] {"1","1","2","3"});
 		problemHandler = new ProblemHandler(problem, 2);
 
 		model.addAttribute("problemHandler", problemHandler);

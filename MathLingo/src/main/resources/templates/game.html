@@ -39,95 +39,111 @@
 						</div>
 					</div>
 					
-					<div th:if="${problemHandler.guessIndex == problemHandler.maxGuessesAllowed-1}">
+					<div th:if="${problemHandler.guessIndex == problemHandler.maxGuessesAllowed}">
 						<div class="lose-box">
 							
 						</div>
 					</div>
 					
-					<!-- Format all types of guesses to look like f(x)
-						
-						past | present | future 
-						
-						make char box square, 1 char, white outline like worlde normal
-						make expo box sqaure, 1 char, white outline like wordle execpt positioned to the top right of any given char box
-						all boxes appear left to right on the same line and are relatively big
-					-->
-					
 					<!-- Create system for on win or on lose which stops gameplay 
 					and displays solution along with stats and quick representation of gameplay with restart button (go to main page + randomize game on play from text file maybe json instead)
 					-->
 						
-					<!-- On game win, change currGuess container to stop working and look normal like past ones
+					<!-- On game win, change currGuess container to stop working and look normal like past one
 					On game win or lose, show stat graphic 
 					-->	
 					
-					<th:block th:each="guess, guessIter : ${#numbers.sequence(0, problemHandler.maxGuessesAllowed-1)}">
-						<div th:if="${guessIter.index == problemHandler.guessIndex}">
-							<div class="curr-guess guess">
-								<form action="#" method="post" th:action="@{processGuess}" th:object="${userGuess}" autocomplete="off">
+						<th:block th:each="guess, guessIter : ${#numbers.sequence(0, problemHandler.maxGuessesAllowed-1)}">
+							<div th:if="${guessIter.index == problemHandler.guessIndex}">
+								
+								<div th:unless="${problemHandler.win}">
+									<div class="curr-guess guess">
+										<form action="#" method="post" th:action="@{processGuess}" th:object="${userGuess}" autocomplete="off">
+											<div class="guess-boxes">
+												<th:block th:each="boxID, boxIDIter : ${problemHandler.problem.boxIDs}">
+			
+														<div th:if="${#strings.equals(boxID, problemHandler.problem.CHAR_BOX)}"> 
+															<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-char-box char-box box" maxlength="1" 	required></input>
+														</div>
+														
+														<div th:if="${#strings.equals(boxID, problemHandler.problem.EXPO_BOX)}"> 
+															<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-expo-box expo-box box" maxlength="1" required></input>
+														</div>
+														
+												</th:block>
+											</div>
+											<button type="submit" class="btn btn-primary guessSubmit">Submit</button>
+										</form>
+									</div>
+								</div>
+								
+								<div th:if="${problemHandler.win}">
+									<div class="curr-guess guess"> 
+										<div class="guess-boxes">
+											<th:block th:each="boxID, boxIDIter : ${problemHandler.problem.boxIDs}">
+												
+												<div th:if="${#strings.equals(boxID, problemHandler.problem.CHAR_BOX)}"> 
+													<div class="char-box box">
+														<h1></h1>
+													</div>
+												</div>
+
+												<div th:if="${#strings.equals(boxID, problemHandler.problem.EXPO_BOX)}"> 
+													<div class="expo-box box">
+														<h1></h1>
+													</div>
+												</div>
+												
+											</th:block>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div th:if="${guessIter.index < problemHandler.guessIndex}">
+								<div class="not-curr-guess guess"> 
 									<div class="guess-boxes">
 										<th:block th:each="boxID, boxIDIter : ${problemHandler.problem.boxIDs}">
-	
+		
 												<div th:if="${#strings.equals(boxID, problemHandler.problem.CHAR_BOX)}"> 
-													<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-char-box char-box box" maxlength="1" 	required></input>
+													<div class="char-box box" th:classappend="${problemHandler.guesses[__${guessIter.index}__].guessBoxes[__${boxIDIter.index}__].color}">
+														<h1 th:text="${problemHandler.guesses[__${guessIter.index}__].guessBoxes[__${boxIDIter.index}__].value}"></h1>
+													</div>
 												</div>
 												
 												<div th:if="${#strings.equals(boxID, problemHandler.problem.EXPO_BOX)}"> 
-													<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-expo-box expo-box box" maxlength="1" required></input>
+													<div class="expo-box box" th:classappend="${problemHandler.guesses[__${guessIter.index}__].guessBoxes[__${boxIDIter.index}__].color}">
+														<h1 th:text="${problemHandler.guesses[__${guessIter.index}__].guessBoxes[__${boxIDIter.index}__].value}"></h1>
+													</div>
 												</div>
 												
 										</th:block>
 									</div>
-									<button type="submit" class="btn btn-primary guessSubmit">Submit</button>
-								</form>
+								</div>
 							</div>
-						</div>
-						
-						<div th:if="${guessIter.index < problemHandler.guessIndex}">
-							<div class="not-curr-guess guess"> 
-								<div class="guess-boxes">
-									<th:block th:each="boxID, boxIDIter : ${problemHandler.problem.boxIDs}">
-	
+							
+							<div th:if="${guessIter.index > problemHandler.guessIndex}">
+								<div class="not-curr-guess guess"> 
+									<div class="guess-boxes">
+										<th:block th:each="boxID, boxIDIter : ${problemHandler.problem.boxIDs}">
+											
 											<div th:if="${#strings.equals(boxID, problemHandler.problem.CHAR_BOX)}"> 
-												<div class="char-box box" th:classappend="${problemHandler.guesses[__${guessIter.index}__].guessBoxes[__${boxIDIter.index}__].color}">
-													<h1 th:text="${problemHandler.guesses[__${guessIter.index}__].guessBoxes[__${boxIDIter.index}__].value}"></h1>
+												<div class="char-box box">
+													<h1></h1>
 												</div>
 											</div>
-											
+			
 											<div th:if="${#strings.equals(boxID, problemHandler.problem.EXPO_BOX)}"> 
-												<div class="expo-box box" th:classappend="${problemHandler.guesses[__${guessIter.index}__].guessBoxes[__${boxIDIter.index}__].color}">
-													<h1 th:text="${problemHandler.guesses[__${guessIter.index}__].guessBoxes[__${boxIDIter.index}__].value}"></h1>
+												<div class="expo-box box">
+													<h1></h1>
 												</div>
 											</div>
 											
-									</th:block>
+										</th:block>
+									</div>
 								</div>
 							</div>
-						</div>
-						
-						<div th:if="${guessIter.index > problemHandler.guessIndex}">
-							<div class="not-curr-guess guess"> 
-								<div class="guess-boxes">
-									<th:block th:each="boxID, boxIDIter : ${problemHandler.problem.boxIDs}">
-										
-										<div th:if="${#strings.equals(boxID, problemHandler.problem.CHAR_BOX)}"> 
-											<div class="char-box box">
-												<h1></h1>
-											</div>
-										</div>
-		
-										<div th:if="${#strings.equals(boxID, problemHandler.problem.EXPO_BOX)}"> 
-											<div class="expo-box box">
-												<h1></h1>
-											</div>
-										</div>
-										
-									</th:block>
-								</div>
-							</div>
-						</div>
-					</th:block>
+						</th:block>
 				</div>
 			</div>
 		</div>

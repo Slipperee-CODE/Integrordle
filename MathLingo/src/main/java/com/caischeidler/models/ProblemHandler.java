@@ -1,6 +1,8 @@
 package com.caischeidler.models;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ProblemHandler {
 	private Guess[] guesses;
@@ -31,35 +33,29 @@ public class ProblemHandler {
 		}
 		
 		//nested for loop to check for yellow except any already green ones in solution and problem get skipped to check for yellows
+		List<Integer> alreadySetToForYellowIndexes = new ArrayList<Integer>();
+		
 		for (int i = 0; i < problem.getGuessBoxSolutions().length; i++) {
 			if (guess.getGuessBoxes()[i].getColor().equals(GuessBox.GRAY)) {
-				int yellowForIndex = matchingCurrentlyGrayBox(guess, i ,problem);
+				int yellowForIndex = matchingCurrentlyGrayBox(guess, i , problem, alreadySetToForYellowIndexes);
 				if (yellowForIndex > -1) {
-					if (noYellowForSolutionAtPreviousIndex(guess, i , problem, yellowForIndex)) {
-						guess.getGuessBoxes()[i].setColor(GuessBox.YELLOW);
-					}
+					guess.getGuessBoxes()[i].setColor(GuessBox.YELLOW);
+					alreadySetToForYellowIndexes.add(yellowForIndex);
 				}
 			}
 		}
 		return guess;
 	}
 	
-	private int matchingCurrentlyGrayBox(Guess guess, int currIndex, Problem problem) {
+	private int matchingCurrentlyGrayBox(Guess guess, int currIndex, Problem problem, List<Integer> alreadySetToForYellowIndexes) {
 		for (int i = 0; i < guess.getGuessBoxes().length; i++) {
-			if (guess.getGuessBoxes()[i].getColor().equals(GuessBox.GRAY) && guess.getGuessBoxes()[currIndex].getValue().equals(problem.getGuessBoxSolutions()[i])){
-				return i;
+			if (!guess.getGuessBoxes()[i].getColor().equals(GuessBox.GREEN) && guess.getGuessBoxes()[currIndex].getValue().equals(problem.getGuessBoxSolutions()[i])){
+				if (!alreadySetToForYellowIndexes.contains(i)) {
+					return i;
+				}
 			}
 		}
 		return -1;
-	}
-	
-	private boolean noYellowForSolutionAtPreviousIndex(Guess guess, int currIndex, Problem problem, int yellowForIndex) {
-		for (int i = currIndex; i >= yellowForIndex; i--) {
-			if (guess.getGuessBoxes()[i].getColor().equals(GuessBox.YELLOW) && guess.getGuessBoxes()[i].getValue().equals(problem.getGuessBoxSolutions()[yellowForIndex])){
-				return false;
-			}
-		}
-		return true;
 	}
 	
 	private boolean checkForWin(Guess guess, Problem problem) {
