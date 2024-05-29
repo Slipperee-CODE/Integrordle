@@ -129,3 +129,47 @@
 	background-color: green;
 	border-width: 0;
 }
+
+.stats-box{
+	z-index: 2;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 75vh;
+	width: 50vw;
+	background-color: #111;
+	border-radius:25px;
+}
+
+.inner-stats-box{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 95%;
+	width: 95%;
+	background-color: black;
+	border-radius: 25px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.stats-title-box{
+	margin: 20px;
+	text-align: center;
+}
+
+.stats-title-box h1 {
+	font-size: 100px;
+	color: white;
+	font-weight: bold;
+}
+
+.play-again{
+	border-radius: 30px;
+	font-size: 50px;
+	font-weight: bold;
+}
