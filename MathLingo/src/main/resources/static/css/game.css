@@ -16,8 +16,21 @@
 }
 
 .game-box::-webkit-scrollbar {
-  display: none;
+	width:50px;
+  	border-radius: 10px;
+  	background-color: rgb(0, 0, 0 ,0);
 }
+
+.game-box::-webkit-scrollbar-thumb {
+	width:50px;
+  	border-radius: 10px;
+  	background-color: rgb(128, 128, 128);
+}
+
+.game-box::-webkit-scrollbar-thumb:hover {
+  	background-color: rgb(100, 100, 100);
+}
+
 
 .header-box{
 	margin: 20px;
@@ -50,6 +63,7 @@
 
 .center-items{
 	align-items: center;
+	justify-content: center;
 }
 
 .char-box{
@@ -140,10 +154,13 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	height: 90vh;
-	width: 90vw;
+	height: 95vh;
+	width: 95vw;
 	background-color: #111;
 	border-radius:25px;
+	-webkit-box-shadow:0px 0px 130px 17px rgba(221,230,227,0.32);
+	-moz-box-shadow: 0px 0px 130px 17px rgba(221,230,227,0.32);
+	box-shadow: 0px 0px 130px 17px rgba(221,230,227,0.32);
 }
 
 .inner-stats-box{
@@ -176,6 +193,7 @@
 	border-radius: 30px;
 	font-size: 50px;
 	font-weight: bold;
+	margin: 20px;
 }
 
 .micro-box {
@@ -183,21 +201,31 @@
 }
 
 .micro-char-box{
-	height: 50px;
-	width: 50px;
+	height: 100px;
+	width: 100px;
 	
 	display: flex;
 	text-align: center;
+	align-items: center;
 	justify-content: center;
 }
 
+.micro-char-box h1{
+	font-size: 100px;
+}
+
+.micro-expo-box h1{
+	font-size: 40px;
+}
+
 .micro-expo-box{
-	height: 25px;
-	width: 25px;
-	margin-bottom: 15px;
-		
+	height: 50px;
+	width: 50px;
+	margin-bottom: 30px;
+
 	display: flex;
 	text-align: center;
+	align-items: center;
 	justify-content: center;
 }
 
@@ -208,10 +236,11 @@
 	padding: 5px;
 }
 
-.stats-body h1{
+.this-play-stats{
 	font-size: 20px;
 	color: white;
 	font-weight: bold;
+	padding: 20px
 }
 
 .problem-id{
@@ -223,4 +252,42 @@
 	color: gray;
 	font-size: 20px;
 	font-weight: bold;
+}	
+
+.solution-on-loss {
+	background-color: #111;
+	border-radius: 20px;
+	height: 200px;
+	margin: 20px;
+}
+
+.solution-on-loss-click-h1{
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 20px
+}
+
+.solution-on-loss-text{
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.5s; 
+}
+
+.lose-page-body-content{
+	display: flex;
+	flex-direction: row;
+}
+
+.back-button{
+	position: absolute;
+	z-index: 3;
+	border-radius: 30px;
+	font-size: 25px;
+	font-weight: bold;
+	padding: 25px 75px;
+	
+	top: 10%;
+	left: 15%;
+	transform: translate(-50%, -50%);
 }

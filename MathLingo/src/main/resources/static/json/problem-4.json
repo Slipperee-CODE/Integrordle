@@ -7,5 +7,5 @@
 	"area" : "-2",
 	"boxIDs" : ["CHAR_BOX", "CHAR_BOX", "CHAR_BOX", "CHAR_BOX", "CHAR_BOX", "CHAR_BOX"],
 	"guessBoxSolutions" : ["s", "i", "n","(", "x", ")"],
-	"maxGuesses" : 4
+	"maxGuesses" : 3
 }
