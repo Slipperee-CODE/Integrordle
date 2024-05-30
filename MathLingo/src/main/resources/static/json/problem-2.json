@@ -7,5 +7,5 @@
 	"area" : "2x^{2}+3",
 	"boxIDs" : ["CHAR_BOX", "CHAR_BOX", "EXPO_BOX", "CHAR_BOX", "CHAR_BOX"],
 	"guessBoxSolutions" : ["2", "x", "2", "+", "3"],
-	"maxGuesses" : 3
+	"maxGuesses" : 1
 }

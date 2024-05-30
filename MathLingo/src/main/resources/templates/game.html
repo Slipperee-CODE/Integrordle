@@ -1,9 +1,12 @@
 <!doctype html>
 <html layout:decorate="layouts/gameLayout">
 	<!-- 
-		Finish How To Play Section 
-		Playtest game
+		make back to home button go to streakHome instead of normal home
+		make input automatically move to next box and automatically move back
 		Make more problems
+		Playtest game
+		
+		Finish How To Play Section 
 		fix solution box centering I think it broke again
 		make urls nicer home/streakHome, game/processGuess, etc.
 		comment all java code methods and classes
@@ -68,7 +71,7 @@
 								<h1>Nice Work!</h1>
 							</div>
 							<div class="stats-body">
-								<h1>This Play's Stats</h1>
+								<h1 class="this-play-stats">This Play's Stats</h1>
 								<th:block th:each="guessIndex : ${#numbers.sequence(0, problemHandler.guessIndex-1)}">
 									<div class="guess-boxes">
 										<th:block th:each="guessBoxIndex : ${#numbers.sequence(0, problemHandler.problem.boxIDs.length-1)}">

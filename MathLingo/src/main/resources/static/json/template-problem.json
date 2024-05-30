@@ -1,0 +1,11 @@
+{	
+	"description" : "",
+	"functionLetter" : "",
+	"constant" : " ",
+	"upperBound" : "",
+	"lowerBound" : "",
+	"area" : "",
+	"boxIDs" : ["CHAR_BOX"],
+	"guessBoxSolutions" : ["x"],
+	"maxGuesses" : 3
+}

@@ -1,0 +1,11 @@
+{	
+	"description" : "ceiling volume, but missing pie",
+	"functionLetter" : FIX THIS AND ADD CEILING PART HERE "f",
+	"constant" : " ",
+	"upperBound" : "1",
+	"lowerBound" : "0",
+	"area" : "2",
+	"boxIDs" : ["CHAR_BOX", "CHAR_BOX", "EXPO_BOX"],
+	"guessBoxSolutions" : ["4", "x", "2"],
+	"maxGuesses" : 3
+}

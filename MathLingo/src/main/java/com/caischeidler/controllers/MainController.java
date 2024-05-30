@@ -22,21 +22,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class MainController {
-	
-	//TO IMPLEMENT
-	// - FORMAT MATH TEXT
-	
-	// - FIX COLORING SCHEME (ADD COLORS)
-	// - FORMAT INTEGRAL INPUT
-	// - WIN AND LOSE SCREENS
-	// - PLAY AGAIN
-	// - TEXT FILE FULL OF PROBLEMS   
-	
 	String[] SYMBOL_PATHS = {"images/multiply","images/subtract","images/add","images/divide"};
 	ProblemHandler problemHandler;
 	List<Integer> problemBag;
 	StreakHandler streakHandler;
-	public static final int PROBLEM_COUNT = 5;
+	public static final int PROBLEM_COUNT = 7;
 	
 	@GetMapping("") //maybe just put cuellar's favorite things in the menu like sponsors, have how to play be normal
 	public String homePage(Model model) {		

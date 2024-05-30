@@ -5,7 +5,7 @@ public class StreakHandler {
 	private String currStreakColor = GuessBox.GRAY;
 	private int highestStreak = 0;
 	private String highestStreakColor = GuessBox.GRAY;
-	private final int SPACE_BETWEEN_COLOR_LEVEL_UPS = 1;
+	private final int SPACE_BETWEEN_COLOR_LEVEL_UPS = 2;
 	
 	public void handleCurrStreak(ProblemHandler problemHandler) {
 		if (problemHandler.isWin()) {

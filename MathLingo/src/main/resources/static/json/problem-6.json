@@ -1,0 +1,11 @@
+{	
+	"description" : "indefinitely easy, can't you see?",
+	"functionLetter" : "f",
+	"constant" : "",
+	"upperBound" : "",
+	"lowerBound" : "",
+	"area" : "\\frac{4^{x}}{\\ln{4}}+2x+C",
+	"boxIDs" : ["CHAR_BOX","EXPO_BOX","CHAR_BOX","CHAR_BOX"],
+	"guessBoxSolutions" : ["4","x","+","2"],
+	"maxGuesses" : 2
+}
