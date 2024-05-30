@@ -16,6 +16,8 @@ import com.caischeidler.models.Guess;
 import com.caischeidler.models.JSONStoredProblem;
 import com.caischeidler.models.Problem;
 import com.caischeidler.models.ProblemHandler;
+import com.caischeidler.models.ProblemID;
+import com.caischeidler.models.StreakHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -33,12 +35,30 @@ public class MainController {
 	String[] SYMBOL_PATHS = {"images/multiply","images/subtract","images/add","images/divide"};
 	ProblemHandler problemHandler;
 	List<Integer> problemBag;
+	StreakHandler streakHandler;
 	public static final int PROBLEM_COUNT = 5;
 	
 	@GetMapping("") //maybe just put cuellar's favorite things in the menu like sponsors, have how to play be normal
 	public String homePage(Model model) {		
 		model.addAttribute("symbolList", generateBackgroundSymbols(30));
 		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
+		ProblemID problemID = new ProblemID();
+		problemID.setTOTAL_PROBLEM_COUNT(PROBLEM_COUNT);
+		model.addAttribute("problemID", problemID);
+		streakHandler = new StreakHandler();
+		model.addAttribute("streakHandler",streakHandler);
+		return "home";
+	}
+	
+	@PostMapping("streakHome") //maybe just put cuellar's favorite things in the menu like sponsors, have how to play be normal
+	public String streakHomePage(Model model) {		
+		model.addAttribute("symbolList", generateBackgroundSymbols(30));
+		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
+		ProblemID problemID = new ProblemID();
+		problemID.setTOTAL_PROBLEM_COUNT(PROBLEM_COUNT);
+		model.addAttribute("problemID", problemID);
+		streakHandler.handleCurrStreak(problemHandler);
+		model.addAttribute("streakHandler", streakHandler);
 		return "home";
 	}
 	
@@ -90,6 +110,23 @@ public class MainController {
 		return "game";
 	}
 	
+	@PostMapping("processCustomProblemRequest")
+	public String processCustomProblemRequest(@ModelAttribute("problemID") ProblemID problemID, Model model) { //User Guess is not being received properly 
+		model.addAttribute("symbolList", generateBackgroundSymbols(30));
+		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
+		
+		
+		problemHandler = getSpecificProblem(problemID.getProblemID());
+		
+		
+		model.addAttribute("problemHandler", problemHandler);
+		Guess guess = new Guess();
+		guess.setProblem(problemHandler.getProblem());
+		model.addAttribute("userGuess", guess);
+		
+		return "game";
+	}
+	
 	private List<ArrayList<Integer>> generateBackgroundSymbols(int size) {
 		List<ArrayList<Integer>> symbolList = new ArrayList<ArrayList<Integer>>();
 		for (int i = 0; i < size; i++) {
@@ -118,5 +155,21 @@ public class MainController {
 
 		Problem problem = new Problem(jsonP.getDescription(),jsonP.getFunctionLetter(),jsonP.getConstant(),jsonP.getUpperBound(),jsonP.getLowerBound(),jsonP.getArea(),jsonP.getBoxIDs(),jsonP.getGuessBoxSolutions(),jsonP.getMaxGuesses());
 		return new ProblemHandler(problem, problem.getMaxGuesses(), randomProblemID);
+	}
+	
+	private ProblemHandler getSpecificProblem(int id) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		File problemJSONFile = new File("src/main/resources/static/json/problem-" + id + ".json");
+		JSONStoredProblem jsonP = null;
+		
+		try {
+			 jsonP = objectMapper.readValue(problemJSONFile, JSONStoredProblem.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Problem problem = new Problem(jsonP.getDescription(),jsonP.getFunctionLetter(),jsonP.getConstant(),jsonP.getUpperBound(),jsonP.getLowerBound(),jsonP.getArea(),jsonP.getBoxIDs(),jsonP.getGuessBoxSolutions(),jsonP.getMaxGuesses());
+		return new ProblemHandler(problem, problem.getMaxGuesses(), id);
 	}
 }

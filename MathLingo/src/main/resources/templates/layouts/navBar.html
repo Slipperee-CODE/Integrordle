@@ -10,13 +10,21 @@
 	
 	<div id="mySidenav" class="sidenav">
 	  <div class="sidenav-info-top">
-		
+		<form action="#" method="post" th:action="@{processCustomProblemRequest}" th:object="${problemID}" autocomplete="off">
+			<input type="number" th:field="*{problemID}" class="input-char-box char-box box" min="0" th:max="*{TOTAL_PROBLEM_COUNT-1}"></input>
+			<button type="submit" class="btn btn-light submit">Submit</button>
+		</form>
 	  </div>
 	  <div class="sidenav-info">
-
+		<div class="char-box streak-box" th:classappend="${streakHandler.currStreakColor}">
+			<h1 th:text="${streakHandler.currStreak}"></h1>
+		</div>
+		<div class="char-box streak-box" th:classappend="${streakHandler.highestStreakColor}">
+			<h1 th:text="${streakHandler.highestStreak}"></h1>
+		</div>
 	  </div>
 	  <div class="sidenav-info">
-
+		<h3 class="credits-text">created by Cai Scheidler as a final project for the one, the only, the magical, Mr. Cuellar</h3>
 	  </div>
 	</div>
 	

@@ -1,5 +1,14 @@
 <!doctype html>
 <html layout:decorate="layouts/gameLayout">
+	<!-- 
+		Finish How To Play Section 
+		Playtest game
+		Make more problems
+		fix solution box centering I think it broke again
+		make urls nicer home/streakHome, game/processGuess, etc.
+		comment all java code methods and classes
+	-->	
+
 	<head>
 		<link rel="stylesheet" href="css/game.css">
 		<link rel="icon" href="images/favicon.png">
@@ -80,7 +89,7 @@
 									</div>
 								</th:block>
 							</div>
-							<form action="#" th:action="@{/}">
+							<form action="#" method="post" th:action="@{streakHome}" autocomplete="off">
 								<button type="submit" class="btn btn-light play-again">Play Again</button>
 							</form>
 							<div class="problem-id">
@@ -98,13 +107,6 @@
 							<div class="stats-title-box">
 								<h1>Nice Try!</h1>
 							</div>
-							<!-- 
-							afterwards finish the how to play section of main menu and cuellar up the settings menu
-							
-							allow custom input of problem ID to go directly to a certain problem (NTH) do this by having 
-							another controller url which is gone to on button press and creates based off input received 
-							then goes to proccess guess on button press put this mechanic in the settings menu of main menu
-							-->
 							<div class="lose-page-body-content">
 								<div class="solution-on-loss" onclick="showOrHideSolution()">
 									<h1 class="solution-on-loss-click-h1">SHOW/HIDE SOLUTION</h1>
@@ -151,7 +153,7 @@
 									</th:block>
 								</div>
 							</div>
-							<form action="#" th:action="@{/}">
+							<form action="#" method="post" th:action="@{streakHome}" autocomplete="off">
 								<button type="submit" class="btn btn-light play-again">Play Again</button>
 							</form>
 							<div class="problem-id">
