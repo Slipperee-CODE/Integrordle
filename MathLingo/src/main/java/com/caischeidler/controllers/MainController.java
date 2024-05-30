@@ -32,6 +32,8 @@ public class MainController {
 	
 	String[] SYMBOL_PATHS = {"images/multiply","images/subtract","images/add","images/divide"};
 	ProblemHandler problemHandler;
+	List<Integer> problemBag;
+	public static final int PROBLEM_COUNT = 5;
 	
 	@GetMapping("") //maybe just put cuellar's favorite things in the menu like sponsors, have how to play be normal
 	public String homePage(Model model) {		
@@ -45,8 +47,19 @@ public class MainController {
 		model.addAttribute("symbolList", generateBackgroundSymbols(30));
 		model.addAttribute("SYMBOL_PATHS", SYMBOL_PATHS);
 		
-
-		problemHandler = getRandomProblem(5); //TO-DO: Create JSON files for problems 
+		if (problemBag == null) {
+			problemBag = new ArrayList<Integer>();
+			for (int i = 0; i < PROBLEM_COUNT; i++) {
+				problemBag.add(i);
+			}
+		}
+		if (problemBag.size()==0) {
+			for (int i = 0; i < PROBLEM_COUNT; i++) {
+				problemBag.add(i);
+			}
+		}
+		
+		problemHandler = getRandomProblem(problemBag); //TO-DO: Create JSON files for problems 
 		
 		//Make custom class for problem data then construct instance of problem class using it
 		
@@ -88,11 +101,13 @@ public class MainController {
 		return symbolList;
 	}
 	
-	private ProblemHandler getRandomProblem(int problemCount) {
+	private ProblemHandler getRandomProblem(List<Integer> problemBag) {
 		ObjectMapper objectMapper = new ObjectMapper();
-		int randomProblemID = (int) (Math.random()*problemCount);
+		int randomProblemIndex = (int) (Math.random()*problemBag.size());
+		int randomProblemID = problemBag.get(randomProblemIndex);
 		File problemJSONFile = new File("src/main/resources/static/json/problem-" + randomProblemID + ".json");
 		JSONStoredProblem jsonP = null;
+		problemBag.remove(randomProblemIndex);
 		
 		try {
 			 jsonP = objectMapper.readValue(problemJSONFile, JSONStoredProblem.class);
@@ -100,9 +115,8 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(jsonP);
+
 		Problem problem = new Problem(jsonP.getDescription(),jsonP.getFunctionLetter(),jsonP.getConstant(),jsonP.getUpperBound(),jsonP.getLowerBound(),jsonP.getArea(),jsonP.getBoxIDs(),jsonP.getGuessBoxSolutions(),jsonP.getMaxGuesses());
-		System.out.println(problem);
 		return new ProblemHandler(problem, problem.getMaxGuesses(), randomProblemID);
 	}
 }

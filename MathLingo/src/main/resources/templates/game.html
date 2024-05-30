@@ -23,6 +23,30 @@
 			  return promise;
 			}
 		</script>
+		
+		<script>
+			let solutionShowing = false;
+			
+			function showOrHideSolution(){
+				if (solutionShowing){
+					showSolution();
+				} else {
+					hideSolution();
+				}
+				solutionShowing = !solutionShowing;
+			}
+
+			function showSolution() {
+				document.getElementById("solution-on-loss-text").style.opacity = "100%";
+				document.getElementById("solution-on-loss-text").style.visibility = "visible";
+				
+			}
+
+			function hideSolution() {
+				document.getElementById("solution-on-loss-text").style.opacity = "0%";
+				document.getElementById("solution-on-loss-text").style.visibility = "hidden";
+			}
+		</script>
 	</head>
   	<body>
 		<div layout:fragment="content">	
@@ -75,36 +99,57 @@
 								<h1>Nice Try!</h1>
 							</div>
 							<!-- 
-							Make the solution in the div below and make it click to show/hide
 							afterwards finish the how to play section of main menu and cuellar up the settings menu
-							afterwards create system of bag randomization so that the player doesn't get the same problem 
-							twice before going through every problem
-							figure out centering of post game stats
+							
+							allow custom input of problem ID to go directly to a certain problem (NTH) do this by having 
+							another controller url which is gone to on button press and creates based off input received 
+							then goes to proccess guess on button press put this mechanic in the settings menu of main menu
 							-->
-							<div class="solution-on-loss">
-								
-							</div>
-							<div class="stats-body">
-								<h1>This Play's Stats</h1>
-								<th:block th:each="guessIndex : ${#numbers.sequence(0, problemHandler.guessIndex-1)}">
-									<div class="guess-boxes center-items">
-										<th:block th:each="guessBoxIndex : ${#numbers.sequence(0, problemHandler.problem.boxIDs.length-1)}">
-											
-											<div th:if="${#strings.equals(problemHandler.problem.boxIDs[__${guessBoxIndex}__], problemHandler.problem.CHAR_BOX)}"> 
-												<div class="micro-char-box micro-box" th:classappend="${problemHandler.guesses[__${guessIndex}__].guessBoxes[__${guessBoxIndex}__].color}")>
-													<h1></h1>
+							<div class="lose-page-body-content">
+								<div class="solution-on-loss" onclick="showOrHideSolution()">
+									<h1 class="solution-on-loss-click-h1">SHOW/HIDE SOLUTION</h1>
+									<div class="solution-on-loss-text" id="solution-on-loss-text">
+										<div class="guess-boxes center-items">
+											<th:block th:each="guessBoxIndex : ${#numbers.sequence(0, problemHandler.problem.boxIDs.length-1)}">
+												
+												<div th:if="${#strings.equals(problemHandler.problem.boxIDs[__${guessBoxIndex}__], problemHandler.problem.CHAR_BOX)}"> 
+													<div class="micro-char-box micro-box box">
+														<h1 class="micro-box-symbols" th:text="${problemHandler.problem.guessBoxSolutions[__${guessBoxIndex}__]}"></h1>
+													</div>
 												</div>
-											</div>
-
-											<div th:if="${#strings.equals(problemHandler.problem.boxIDs[__${guessBoxIndex}__], problemHandler.problem.EXPO_BOX)}"> 
-												<div class="micro-expo-box micro-box" th:classappend="${problemHandler.guesses[__${guessIndex}__].guessBoxes[__${guessBoxIndex}__].color}">
-													<h1></h1>
+		
+												<div th:if="${#strings.equals(problemHandler.problem.boxIDs[__${guessBoxIndex}__], problemHandler.problem.EXPO_BOX)}"> 
+													<div class="micro-expo-box micro-box box">
+														<h1 class="micro-box-symbols" th:text="${problemHandler.problem.guessBoxSolutions[__${guessBoxIndex}__]}"></h1>
+													</div>
 												</div>
-											</div>
-											
-										</th:block>
+												
+											</th:block>
+										</div>
 									</div>
-								</th:block>
+								</div>
+								<div class="stats-body">
+									<h1 class="this-play-stats">This Play's Stats</h1>
+									<th:block th:each="guessIndex : ${#numbers.sequence(0, problemHandler.guessIndex-1)}">
+										<div class="guess-boxes center-items">
+											<th:block th:each="guessBoxIndex : ${#numbers.sequence(0, problemHandler.problem.boxIDs.length-1)}">
+												
+												<div th:if="${#strings.equals(problemHandler.problem.boxIDs[__${guessBoxIndex}__], problemHandler.problem.CHAR_BOX)}"> 
+													<div class="micro-char-box micro-box" th:classappend="${problemHandler.guesses[__${guessIndex}__].guessBoxes[__${guessBoxIndex}__].color}")>
+														<h1></h1>
+													</div>
+												</div>
+	
+												<div th:if="${#strings.equals(problemHandler.problem.boxIDs[__${guessBoxIndex}__], problemHandler.problem.EXPO_BOX)}"> 
+													<div class="micro-expo-box micro-box" th:classappend="${problemHandler.guesses[__${guessIndex}__].guessBoxes[__${guessBoxIndex}__].color}">
+														<h1></h1>
+													</div>
+												</div>
+												
+											</th:block>
+										</div>
+									</th:block>
+								</div>
 							</div>
 							<form action="#" th:action="@{/}">
 								<button type="submit" class="btn btn-light play-again">Play Again</button>
@@ -118,10 +163,11 @@
 			</div>
 			
 			<div class="game-box">
+				<a href="/" class="btn btn-light back-button">Back to Home</a>
 				<div class="header-box">
 					<h1 id="problemHeader" th:text="${problemHandler.problem.mathJaxFormattedIntegral}"></h1>
 					<h2 th:text="${problemHandler.problem.description}"></h2>
-					<h1 th:text="${problemHandler.problem.mathJaxFormattedFunction}"></h1>
+					<h1 th:text="${problemHandler.problem.mathJaxFormattedFunction}" style="margin-top: 50px; margin-bottom: 10px"></h1>
 				</div>
 				<div class="gameplay-box">
 					<th:block th:each="guess, guessIter : ${#numbers.sequence(0, problemHandler.maxGuessesAllowed-1)}">
