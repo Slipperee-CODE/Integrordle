@@ -1,10 +1,15 @@
 <!doctype html>
 <html layout:decorate="layouts/gameLayout">
 	<!-- 
-		make back to home button go to streakHome instead of normal home
 		make input automatically move to next box and automatically move back
+		check script below, for some reason the event listener is not running on keyup, also focus might not work caues maybe not siblings?S
+		
 		Make more problems
 		Playtest game
+		
+		
+		
+		Fix  leo's ceiling problem by adding part to integral wihtout adding to function letter
 		
 		Finish How To Play Section 
 		fix solution box centering I think it broke again
@@ -58,6 +63,27 @@
 				document.getElementById("solution-on-loss-text").style.opacity = "0%";
 				document.getElementById("solution-on-loss-text").style.visibility = "hidden";
 			}
+		</script>
+		
+		<script>
+			function setEventListeners(){
+				var elts = document.getElementsByClassName('input-box')
+				console.log(elts);
+				Array.from(elts).forEach(function(elt){
+				  elt.addEventListener("keyup", function(event) { //SOMETHING WRONG HERE
+					alert("YO");
+				    if (elt.value.length == 1) {
+					console.log("yes");
+				      elt.nextElementSibling.focus()
+				    }
+					if (event.keyCode == 46) {
+					  elt.previousElementSibling.focus()
+					}
+				  });
+				})
+			}
+			
+			window.addEventListener('load', setEventListeners());
 		</script>
 	</head>
   	<body>
@@ -168,7 +194,9 @@
 			</div>
 			
 			<div class="game-box">
-				<a href="/" class="btn btn-light back-button">Back to Home</a>
+				<form action="#" method="post" th:action="@{streakHome}" autocomplete="off">
+					<button type="submit" class="btn btn-light back-button">Back to Home</button>
+				</form>
 				<div class="header-box">
 					<h1 id="problemHeader" th:text="${problemHandler.problem.mathJaxFormattedIntegral}"></h1>
 					<h2 th:text="${problemHandler.problem.description}"></h2>
@@ -185,11 +213,11 @@
 											<th:block th:each="boxID, boxIDIter : ${problemHandler.problem.boxIDs}">
 		
 													<div th:if="${#strings.equals(boxID, problemHandler.problem.CHAR_BOX)}"> 
-														<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-char-box char-box box" maxlength="1" 	required></input>
+														<input th:id="${boxIDIter.index}" type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-box input-char-box char-box box" maxlength="1" required></input>
 													</div>
 													
 													<div th:if="${#strings.equals(boxID, problemHandler.problem.EXPO_BOX)}"> 
-														<input type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-expo-box expo-box box" maxlength="1" required></input>
+														<input th:id="${boxIDIter.index}" type="text" th:field="*{guessBoxes[__${boxIDIter.index}__].value}" class="input-box input-expo-box expo-box box" maxlength="1" required></input>
 													</div>
 													
 											</th:block>

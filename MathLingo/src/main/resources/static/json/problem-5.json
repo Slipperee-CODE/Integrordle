@@ -1,6 +1,6 @@
 {	
 	"description" : "ceiling volume, but missing pie",
-	"functionLetter" : FIX THIS AND ADD CEILING PART HERE "f",
+	"functionLetter" : "(\\lceil x + 1 \\rceil)^{2} - f",
 	"constant" : " ",
 	"upperBound" : "1",
 	"lowerBound" : "0",
