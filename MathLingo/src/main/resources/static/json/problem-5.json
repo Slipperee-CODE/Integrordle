@@ -1,11 +1,11 @@
 {	
-	"description" : "ceiling volume, but missing pie",
-	"functionLetter" : "(\\lceil x + 1 \\rceil)^{2} - f",
-	"constant" : " ",
-	"upperBound" : "1",
-	"lowerBound" : "0",
-	"area" : "2",
-	"boxIDs" : ["CHAR_BOX", "CHAR_BOX", "EXPO_BOX"],
-	"guessBoxSolutions" : ["4", "x", "2"],
-	"maxGuesses" : 3
+	"description" : "indefinitely easy, can't you see?",
+	"functionLetter" : "f",
+	"constant" : "",
+	"upperBound" : "",
+	"lowerBound" : "",
+	"area" : "\\frac{4^{x}}{\\ln{4}}+2x+C",
+	"boxIDs" : ["CHAR_BOX","EXPO_BOX","CHAR_BOX","CHAR_BOX"],
+	"guessBoxSolutions" : ["4","x","+","2"],
+	"maxGuesses" : 2
 }

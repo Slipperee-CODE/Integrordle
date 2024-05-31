@@ -244,6 +244,9 @@
 }
 
 .problem-id{
+	position: absolute;
+	top: 90%;
+	left: 80%;
 	text-align: right;
 	margin: 20px;
 }

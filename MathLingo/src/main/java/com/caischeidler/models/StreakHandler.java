@@ -1,5 +1,13 @@
 package com.caischeidler.models;
 
+/*
+StreakHandler.java
+This class handles all logic related to the streak aspect of the game viewable on the home page 
+
+Details:
+- The high number of getters and setters in this class is because it is used by Thymeleaf on the HTML page itself 
+	to access its data which requires getters and setters to function
+*/
 public class StreakHandler {
 	private int currStreak = 0;
 	private String currStreakColor = GuessBox.GRAY;
@@ -7,9 +15,14 @@ public class StreakHandler {
 	private String highestStreakColor = GuessBox.GRAY;
 	private final int SPACE_BETWEEN_COLOR_LEVEL_UPS = 2;
 	
+	/*
+	 This method updates the user's problem streak when they return to the home page from the problem they were solving
+	*/
 	public void handleCurrStreak(ProblemHandler problemHandler) {
 		if (problemHandler.isWin()) {
 			currStreak++;
+		} else if (problemHandler.getGuessIndex()==0){
+			currStreak=currStreak; //I know this line is redundant it's just nice to see the logic
 		} else {
 			currStreak = 0;
 		}
@@ -18,6 +31,9 @@ public class StreakHandler {
 		highestStreakColor = colorStreak(highestStreak);
 	}
 	
+	/*
+	 This method colors the box the streak number resides in depending on if the user has reached a streak certain milestone
+	*/
 	private String colorStreak(int streak) {
 		if (streak >= 2*SPACE_BETWEEN_COLOR_LEVEL_UPS) {
 			return GuessBox.GREEN;

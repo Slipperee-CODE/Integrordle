@@ -2,6 +2,15 @@ package com.caischeidler.models;
 
 import java.util.Arrays;
 
+/*
+Problem.java
+This class is what formats and stores the mathematical expressions which make up the problem statement along with the user's guesses and the
+array containing the solutions for the problem
+
+Details:
+- The high number of getters and setters in this class is because it is used by Thymeleaf on the HTML page itself 
+	to access its data which requires getters and setters to function
+*/
 public class Problem {
 	private String description;
 	private String mathJaxFormattedIntegral;

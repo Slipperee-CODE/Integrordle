@@ -1,7 +1,14 @@
 package com.caischeidler.models;
 
 import java.util.Arrays;
+/*
+Guess.java
+This class is how the player inputs their guesses and one of these is generated per guess the user makes
 
+Details:
+- The high number of getters and setters in this class is because it is used by Thymeleaf on the HTML page itself 
+	to access its data which requires getters and setters to function
+*/
 public class Guess {
 	private GuessBox[] guessBoxes;
 	private Problem problem;

@@ -1,19 +1,6 @@
 <!doctype html>
 <html layout:decorate="layouts/gameLayout">
-	<!-- 
-		make input automatically move to next box and automatically move back
-		check script below, for some reason the event listener is not running on keyup, also focus might not work caues maybe not siblings?S
-		
-		Make more problems
-		Playtest game
-		
-		
-		
-		Fix  leo's ceiling problem by adding part to integral wihtout adding to function letter
-		
-		Finish How To Play Section 
-		fix solution box centering I think it broke again
-		make urls nicer home/streakHome, game/processGuess, etc.
+	<!-- 		 
 		comment all java code methods and classes
 	-->	
 
@@ -32,7 +19,7 @@
 					return [problemHeader];
 				}));
 			
-			let promise = Promise.resolve();  // Used to hold chain of typesetting calls
+			let promise = Promise.resolve();
 
 			function typeset(code) {
 			  promise = promise.then(() => MathJax.typesetPromise(code()))
@@ -67,23 +54,29 @@
 		
 		<script>
 			function setEventListeners(){
-				var elts = document.getElementsByClassName('input-box')
+				var elts = document.getElementsByClassName('input-box');
 				console.log(elts);
 				Array.from(elts).forEach(function(elt){
-				  elt.addEventListener("keyup", function(event) { //SOMETHING WRONG HERE
-					alert("YO");
-				    if (elt.value.length == 1) {
-					console.log("yes");
-				      elt.nextElementSibling.focus()
+				  elt.addEventListener("keyup", function(event) {
+					var newElt;
+				    if (elt.value.length == 1 && event.keyCode != 8) {
+				      	var currID = elt.getAttribute("id");
+					  	currID++;
+					  	newElt = document.getElementById(currID);
 				    }
-					if (event.keyCode == 46) {
-					  elt.previousElementSibling.focus()
+					if (event.keyCode == 8) {
+						var currID = elt.getAttribute("id");
+						currID--;
+						newElt = document.getElementById(currID);
+					}
+					if (newElt != null){
+						newElt.focus();
 					}
 				  });
 				})
 			}
 			
-			window.addEventListener('load', setEventListeners());
+			window.addEventListener('load', setEventListeners);
 		</script>
 	</head>
   	<body>

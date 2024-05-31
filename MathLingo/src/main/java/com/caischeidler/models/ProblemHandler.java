@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ProblemHandler.java
+This is the main class for gameplay which takes charge of both doing the actual Wordle-esc logic of the game, the coloring of the boxes 
+and the storage of several game states
+
+Details:
+- The high number of getters and setters in this class is because it is used by Thymeleaf on the HTML page itself 
+	to access its data which requires getters and setters to function
+*/
 public class ProblemHandler {
 	private Guess[] guesses;
 	private Problem problem;
@@ -12,6 +21,7 @@ public class ProblemHandler {
 	private boolean win = false;
 	private int problemID;
 	
+	//Constructor
 	public ProblemHandler(Problem problem, int maxGuessesAllowed, int problemID) {
 		super();
 		this.guesses = new Guess[maxGuessesAllowed];
@@ -20,12 +30,18 @@ public class ProblemHandler {
 		this.problemID = problemID;
 	}
 
+	/*
+	 This method handles the guess inputed by the user by placing it in the array of guesses, checking for win/loss and moving forward the guessIndex
+	*/
 	public void handleCurrGuess(Guess guess) {
 		guesses[guessIndex] = colorGuess(guess, problem);
 		win = checkForWin(guesses[guessIndex], problem);
 		guessIndex++;
 	}
 	
+	/*
+	 This method handles the coloring of the boxes based off Wordle's rules, it is pretty much the main game mechanic
+	*/
 	private Guess colorGuess(Guess guess, Problem problem) {
 		//check for green first
 		for (int i = 0; i < problem.getGuessBoxSolutions().length; i++) {
@@ -49,6 +65,9 @@ public class ProblemHandler {
 		return guess;
 	}
 	
+	/*
+	 This method is used to find if a box's value matches that of a box that is not green and that does not already have a yellow box for it
+	*/
 	private int matchingCurrentlyGrayBox(Guess guess, int currIndex, Problem problem, List<Integer> alreadySetToForYellowIndexes) {
 		for (int i = 0; i < guess.getGuessBoxes().length; i++) {
 			if (!guess.getGuessBoxes()[i].getColor().equals(GuessBox.GREEN) && guess.getGuessBoxes()[currIndex].getValue().equals(problem.getGuessBoxSolutions()[i])){
@@ -60,6 +79,9 @@ public class ProblemHandler {
 		return -1;
 	}
 	
+	/*
+	 This method checks if all boxes are green, therefore determining if the player has won/lost
+	*/
 	private boolean checkForWin(Guess guess, Problem problem) {
 		for (int i = 0; i < problem.getGuessBoxSolutions().length; i++) {
 			if (!guess.getGuessBoxes()[i].getColor().equals(GuessBox.GREEN)){

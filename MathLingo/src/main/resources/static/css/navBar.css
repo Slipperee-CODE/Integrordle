@@ -98,7 +98,8 @@
 	width: 95%;
 	background-color: black;
 	border-radius: 25px;
-	
+	overflow: auto;
+	padding: 10px;
 }
 
 .help-title-box{
@@ -197,4 +198,25 @@ input[type=number]::-webkit-outer-spin-button {
 
 .streak-box h1{
 	font-size: 1em;
+}
+
+.tutorial h3{
+	font-weight: bold;
+	color: white;
+}
+
+.inner-help-box::-webkit-scrollbar {
+	width: 20px;
+  	border-radius: 10px;
+  	background-color: rgb(0, 0, 0 ,0);
+}
+
+.inner-help-box::-webkit-scrollbar-thumb {
+	width: 20px;
+  	border-radius: 10px;
+  	background-color: rgb(128, 128, 128);
+}
+
+.inner-help-box::-webkit-scrollbar-thumb:hover {
+  	background-color: rgb(100, 100, 100);
 }

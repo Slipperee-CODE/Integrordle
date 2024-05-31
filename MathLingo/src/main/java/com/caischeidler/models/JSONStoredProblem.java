@@ -2,6 +2,14 @@ package com.caischeidler.models;
 
 import java.util.Arrays;
 
+/*
+JSONStoredProblem.java
+This class is what is used to retrieve problem data from a .json file
+
+Details:
+- The high number of getters and setters in this class is because it is used to store all the data of a standard problem in 1 class, 
+	meaning I need to access all its data hence all the getters and setters
+*/
 public class JSONStoredProblem {
 	private String description;
 	private String functionLetter; 
