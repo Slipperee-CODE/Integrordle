@@ -11,7 +11,7 @@
 	<div id="mySidenav" class="sidenav">
 	  <div class="sidenav-info-top">
 		<form action="#" method="post" th:action="@{processCustomProblemRequest}" th:object="${problemID}" autocomplete="off">
-			<input type="number" th:field="*{problemID}" class="input-char-box char-box box" min="0" th:max="*{TOTAL_PROBLEM_COUNT-1}"></input>
+			<input type="number" th:field="*{problemID}" class="input-char-box char-box box" min="0" th:max="*{TOTAL_PROBLEM_COUNT-1}" required></input>
 			<button type="submit" class="btn btn-light submit">Submit</button>
 		</form>
 	  </div>
